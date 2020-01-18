@@ -1,8 +1,5 @@
 console.log('JS loaded')
 
-// IMPORT PACKAGES
-var THREE = require('three')
-import { FBXLoader, GLTFLoader, OrbitControls, WebGL } from 'THREE/examples/jsm/controls/';
 // GLOBAL VARIABLES
 var controls, camera, scene, render, light, mixer;
 // CLOCK
@@ -18,11 +15,11 @@ camera.position.set(0, 100, 250)
 scene.add(camera)
 // CREATE RENDERER
 var renderer = new THREE.WebGLRenderer();
-rander.setPixelRatio(window.devicePixelRatio)
+renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setSize( window.innerWidth, window.innerHeight );
-render.shadowMap.enabledd = true
-render.gammaOutput = true
-render.gammaFactor = 2.2
+renderer.shadowMap.enabledd = true
+renderer.gammaOutput = true
+renderer.gammaFactor = 2.2
 
 
 
