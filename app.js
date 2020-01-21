@@ -11,4 +11,4 @@ app.get('/',function(req,res){
 
 app.get('/', (req, res) => res.json('Hello World!'))
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`App listening on port ${port}!`))

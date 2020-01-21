@@ -1,12 +1,22 @@
 {
-  "name": "Three.js Particles",
+  "name": "three-js-particles",
   "version": "1.0.0",
-  "descripton": "",
+  "description": "React project using API's",
   "main": "app.js",
-  "homepage": "/public/index.html",
-  "private": true
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack-dev-server --mode=development"
   },
-  {
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leeofham/SEI-Project-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leeofham/Sammii-HK/three-js-particles/issues"
+  },
+  "homepage": "https://github.com/Sammii-HK/three-js-particles/blob/master/public/index.html",
   "dependencies": {
     "express": "^4.17.1"
   }
