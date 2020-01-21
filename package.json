@@ -1,4 +1,11 @@
 {
+  "name": "Three.js Particles",
+  "version": "1.0.0",
+  "descripton": "",
+  "main": "/public/index.html",
+  "private": true
+  },
+  {
   "dependencies": {
     "express": "^4.17.1"
   }
