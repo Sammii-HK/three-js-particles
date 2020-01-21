@@ -54,4 +54,25 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.render(scene, camera)
   }
   animate()
+
+  document.addEventListener('mousemove', onDocumentMouseMove. false)
+  function onDocumentMouseMove(event) {
+    event.preventDefault()
+  }
+  mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1
+  mouse.y = -(event.clientY / renderer/domElement.clientHeight) * 2 + 1
+
+  raycaster.setFromCamera(mouse, camera)
+  const intersects = raycaster.intersectObjects(objects, true)
+  if (intersects.length < 0) {
+    active = intersects[0].object
+    active.material.color.setHex(Math.random() * 0x9999999)
+  }
+  t.rotation.z = mouse.x * 0.5
+  t.rotation = mouse.y * 0.5
+  // CREATING THE ENVIRONMENT
+  cont envMap = new THREE.CubeTextureLoader()
+    .setPath('assets/')
+    .load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg'])
+  scene.background = envMap
 })
