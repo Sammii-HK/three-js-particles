@@ -40,5 +40,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // LOAD MANAGER
   loader = new THREE.GLTFLoader()
   // LOAD THE MODEL
-  loader.load()
+  loader.load('assets/butterfly/scene.gltf',
+    function(model) {
+      // ADD MODEL TO SCENE
+      character = model.scene
+      scene.add(character)
+      character.scale.set(1.1, 1.1, 1.1)
+    }
+  )
+  // ANIMATION LOOP
+  function animate() {
+    requestAnimationFrame(animate)
+    renderer.render(scene, camera)
+  }
+  animate()
 })
