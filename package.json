@@ -2,7 +2,8 @@
   "name": "Three.js Particles",
   "version": "1.0.0",
   "descripton": "",
-  "main": "/public/index.html",
+  "main": "app.js",
+  "homepage": "/public/index.html",
   "private": true
   },
   {
