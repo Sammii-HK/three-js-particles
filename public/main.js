@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
   scene.fog = new THREE.Fog(0x6a99ee, 500, 1000)
 
   // CREATE CAMERA
-  const camera = new THREE.PerspectiveCamera( 125, window.innerWidth / window.innerHeight, 1, 2000 )
+  const camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 2000 )
   // var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 )
-  camera.position.set(0, 100, 175)
+  camera.position.set(0, 100, 50)
   scene.add(camera)
 
   // CREATE RENDERER
@@ -37,15 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
   controls.update()
 
   // AMBIENT LIGHT
-  const ambLight = new THREE.AmbientLight(0xffffff, 0.4)
-  scene.add(ambLight)
+  // const ambLight = new THREE.AmbientLight(0xffffff, 0.4)
+  // scene.add(ambLight)
   // DIRECTIONAL LIGHT WITH SHADOW CASTING
-  light = new THREE.DirectionalLight(0xffffff, 1.0)
-  // light = new THREE.DirectionalLight(0xddeeff, .8)
+  // light = new THREE.DirectionalLight(0xffffff, 1.0)
+  light = new THREE.DirectionalLight(0xddeeff, 1.5)
   light.position.set(-10, 50, 10)
   light.castShadow = true
   // light.gammaFactor = 2
-  light.gammaOutput = true
+  // light.gammaOutput = true
   light.shadow.camera.right = 50
   light.shadow.camera.left = -50
   light.shadow.camera.top = 50
@@ -62,28 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
       // ADD MODEL TO SCENE
       character = model.scene
       scene.add(character)
-      character.scale.set(1.1, 1.1, 1.1)
+      character.scale.set(.25, .25, .25)
     }
   )
 
-  document.addEventListener('mousemove', onDocumentMouseMove. false)
-  function onDocumentMouseMove(event) {
-    event.preventDefault()
-    mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1
-    mouse.y = -(event.clientY / renderer/domElement.clientHeight) * 2 + 1
-    raycaster.setFromCamera(mouse, camera)
-    const intersects = raycaster.intersectObjects(objects, true)
-    if (intersects.length < 0) {
-      active = intersects[0].object
-      active.material.color.setHex(Math.random() * 0x9999999)
-    }
-    t.rotation.z = mouse.x * 0.5
-    t.rotation = mouse.y * 0.5
-  }
-
   // CREATING THE ENVIRONMENT
-  const env = new THREE.Scene();
-    env.background = new THREE.CubeTextureLoader()
+  scene.background = new THREE.CubeTextureLoader()
   	.setPath( 'assets/cubeMap/' )
   	.load( [
   		'px.png',
@@ -92,9 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   		'ny.png',
   		'pz.png',
   		'nz.png'
-  	] );
-    scene.add(env)
-
+  	] )
 
     // ADD POINTS FOR PARTICLES TO GEOMETRY
     const geometry = new THREE.BufferGeometry()
@@ -102,9 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let materials = []
     let parameters
     for (let i = 0; i < 1500; i++) {
-      const x = Math.random() * 500 - 30
-      const y = Math.random() * 260 - 30
-      const z = Math.random() * 500 - 30
+      const x = Math.random() * 100 - 30
+      const y = Math.random() * 100 - 30
+      const z = Math.random() * 100 - 30
       vertices.push(x, y, z)
     }
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3))
@@ -141,12 +123,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     animate()
 
-    // function animate() {
-    //   requestAnimationFrame(animate)
-    //   renderer.render(scene, camera)
-    // }
-    // animate()
+    // UPDATE CAMERA USING MOUSE
+    camera.position.x += (mouse.x * 0.3 - camera.position.x) * .05
+    camera.position.y += (mouse.y * 0.3 - (camera.position.y - 30)) * .05
+    // UPDATE MOUSE WITH MOUSE MOVE
+    window.addEventListener("mousemove", mouseMove)
+    function mouseMove(e) {
+      const x = (e.clientX - window.innerWidth / 2)
+      const y = (e.clientY - window.innerWidth / 2)
+      mouse.x = x
+      mouse.y = y
+    }
 
+    // CREATE GROUND PLANE
+    const ground = new THREE.Mesh(
+      new THREE.PlaneBufferGeometry(2000,2000),
+      new THREE.MeshPhongMaterial({ color: 0x586780 })
+    )
+    ground.rotation.x = (Math.PI / 180) * -25
+    // ground.rotation.x = (Math.PI / 180) * -160
+    // ground.rotation.x = (Math.PI / 180) * -15
+    // ground.rotation.x = (Math.PI / 180) * -105
+    // ground.rotation.x = (Math.PI / 180) * -85
+    ground.position.y = -1250
+    // ground.position.y = 5250
+    // ground.position.y = -5250
+    // ground.position.y = -125
+    // ground.position.y = -15
+    ground.recieveShadow = true
+    scene.add(ground)
 
 
 
