@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 4000
+const port = 5000
 const path = require('path')
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -11,4 +11,4 @@ app.get('/',function(req,res){
 
 app.get('/', (req, res) => res.json('Hello World!'))
 
-app.listen(port, () => console.log(`App listening on port ${port}!`))
+app.listen(port, () => console.log(`App listening on port ${port}! 🍌`))
