@@ -18,6 +18,8 @@ A Frontend app, which renders a 3D model of a butterfly within a 360 degree scen
 
 The objective of this project was to explore some of the features available within [Three.js](https://threejs.org/), such as scenes, 3D models and animated geometric points within this 3D space.
 
+[Live Demo](https://sammii-hk.github.io/three-js-particles/)
+
 
 https://user-images.githubusercontent.com/40900195/146812491-3de73c60-6902-4ec8-8844-f32262f8794d.mov
 
