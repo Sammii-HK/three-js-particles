@@ -13,6 +13,6 @@
   },
   "homepage": "https://github.com/Sammii-HK/three-js-particles/blob/master/public/index.html",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   }
 }
