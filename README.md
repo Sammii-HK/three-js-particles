@@ -1,83 +1,53 @@
-# Three.js Particles
+# Three.js Playground
 
-A Frontend app, which renders a 3D model of a butterfly within a 360 degree scene, with moving geometric particles, created with Three.js and Javascript.
+A 3D playground built with Three.js featuring particles, a butterfly model, interactive objects, and real-time tweakable controls.
 
-## Details
+## Quick Start
 
-### Timeframe
-
-1 day
-
-### Technologies Used
-
-* Javascript
-* [Three.js](https://threejs.org/)
-* Express
-
-### App Overview
-
-The objective of this project was to explore some of the features available within [Three.js](https://threejs.org/), such as scenes, 3D models and animated geometric points within this 3D space.
-
-[Live Demo](https://sammii-hk.github.io/three-js-particles/)
-
-
-https://user-images.githubusercontent.com/40900195/146812491-3de73c60-6902-4ec8-8844-f32262f8794d.mov
-
-
-#### Development Process
-
-The function to render the particles within a 3D scene.
-
-```js
-    // CREATE POINTS MATERIAL
-    material = new THREE.PointsMaterial({ size: 1.0, map: texture, blending: THREE.AdditiveBlending, depthTest: false, transparent: true, opacity: 0.5})
-    material.color.setRGB(0.7, 0.7, 0.9)
-    // CREATE POINTS OBJECT
-    const particles = new THREE.Points( geometry, material)
-    // RANDOMIZE ROATION OF PARTICLES
-    particles.rotation.x = Math.random() * 6
-    particles.rotation.y = Math.random() * 1
-    particles.rotation.z = Math.random() * 1
-    scene.add(particles)
-    // MAKE MORE PARTICLES
-    const particles2 = particles.clone()
-    particles2.rotation.x = Math.random() * 6
-    particles2.rotation.y = Math.random() * 1
-    particles2.rotation.z = Math.random() * 1
-    scene.add(particles2)
-
-    // ANIMATION LOOP
-    function animate() {
-      requestAnimationFrame(animate)
-      const d = clock.getDelta()
-      for (let i = 0; i < scene.children.length; i++) {
-        const object = scene.children[i]
-        if (object instanceof THREE.Points) {
-          object.rotation.z += .1 * d
-        }
-      }
-      renderer.render(scene, camera)
-    }
-    animate()
+```bash
+npm install
+npm run dev
 ```
 
-##### Used Sources
+This opens the app in your browser with Vite's hot-reload dev server.
 
-https://sketchfab.com/XiaoMa182
+## Features
 
-https://sketchfab.com/norgeotloic
+- **Particles** - 1500 per-vertex colored particles with additive blending
+- **Butterfly model** - GLTF model loaded into the scene
+- **Cubemap skybox** - 360-degree environment that also drives PBR reflections
+- **Playground objects** - wireframe box, glass box, chrome sphere, glowing sphere, torus knot, icosahedron
+- **lil-gui controls** - tweak particles, objects, fog, shadows, and helpers in real time
+- **Orbit controls** - smooth camera movement with damping
 
-http://www.humus.name/index.php?page=Textures
+## Technologies
 
+- [Three.js](https://threejs.org/) (via npm)
+- [Vite](https://vitejs.dev/) for dev server and bundling
+- [lil-gui](https://lil-gui.georgealways.com/) for the controls panel
 
-#### Functionality
+## Project Structure
 
-The functionality is consistent with other 360 degree environments, and can be explored by drag and drop, zooming is also available.
+```
+src/
+  main.js                  # Entry: scene, renderer, animate loop
+  objects/
+    particles.js           # Particle system with per-vertex colors
+    butterfly.js           # GLTF loader
+    ground.js              # Ground plane
+    playground.js          # Boxes, spheres, torus knot, icosahedron
+  environment/
+    skybox.js              # Cubemap + scene.environment for PBR
+    lighting.js            # Ambient + hemisphere + directional lights
+  controls/
+    gui.js                 # lil-gui controls panel
+    orbit.js               # OrbitControls with damping
+  utils/
+    helpers.js             # Renderer, camera, grid/axes helpers
+```
 
-### Challenges & Achievements
+## Asset Sources
 
-Getting the particles to render in a certain position of the scene.
-
-## Future enhancements
-
-* To incorporate photos I have taken myself to create a 3D scene.
+- https://sketchfab.com/XiaoMa182
+- https://sketchfab.com/norgeotloic
+- http://www.humus.name/index.php?page=Textures
