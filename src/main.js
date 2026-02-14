@@ -26,7 +26,7 @@ setupResizeHandler(camera, renderer)
 
 // Environment
 loadSkybox(scene)
-setupLighting(scene)
+const lights = setupLighting(scene)
 
 // Controls
 const controls = setupOrbitControls(camera, renderer)
@@ -44,6 +44,7 @@ const axes = createAxesHelper(scene)
 const { pParams } = setupGUI({
   particles,
   playgroundObjects,
+  lights,
   scene,
   grid,
   axes,

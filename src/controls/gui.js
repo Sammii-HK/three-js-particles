@@ -1,6 +1,6 @@
 import GUI from 'lil-gui'
 
-export function setupGUI({ particles, playgroundObjects, scene, grid, axes, renderer }) {
+export function setupGUI({ particles, playgroundObjects, lights, scene, grid, axes, renderer }) {
   const gui = new GUI()
 
   // Particles folder
@@ -43,6 +43,24 @@ export function setupGUI({ particles, playgroundObjects, scene, grid, axes, rend
     }
     sub.close()
   }
+
+  // Light folder
+  const lFolder = gui.addFolder('Light')
+  const dir = lights.dir
+  const dirHelper = lights.dirHelper
+  const updateHelper = () => {
+    dirHelper.update()
+  }
+  lFolder.add(dir.position, 'x', -100, 100).name('X').onChange(updateHelper)
+  lFolder.add(dir.position, 'y', 0, 150).name('Y').onChange(updateHelper)
+  lFolder.add(dir.position, 'z', -100, 100).name('Z').onChange(updateHelper)
+  lFolder.add(dir, 'intensity', 0, 5).name('Intensity')
+  lFolder.add(dir, 'castShadow').name('Cast Shadow')
+  lFolder.add(dirHelper, 'visible').name('Show Helper')
+  lFolder.addColor({ color: '#' + dir.color.getHexString() }, 'color').name('Color').onChange((v) => {
+    dir.color.set(v)
+    updateHelper()
+  })
 
   // Scene folder
   const sFolder = gui.addFolder('Scene')

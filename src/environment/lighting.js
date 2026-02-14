@@ -18,5 +18,10 @@ export function setupLighting(scene) {
   dir.shadow.mapSize.height = 2048
   scene.add(dir)
 
-  return { ambient, hemi, dir }
+  // Visual helper so you can see where the light is
+  const dirHelper = new THREE.DirectionalLightHelper(dir, 5)
+  dirHelper.visible = false
+  scene.add(dirHelper)
+
+  return { ambient, hemi, dir, dirHelper }
 }
